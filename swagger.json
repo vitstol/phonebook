@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Example phonebook"
+  },
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/contact": {
+      "get": {
+        "description": "return all records",
+        "responses": {
+          "200": {
+            "description": "return list od records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contacts"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "add new contact to db",
+        "parameters": [
+          {
+            "name": "contact",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTPStatus.OK"
+          }
+        }
+      },
+      "put": {
+        "description": "update some phone number;",
+        "parameters": [
+          {
+            "name": "contact",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdatePhone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTPStatus.OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete some record by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTPStatus.OK"
+          }
+        }
+      }
+    },
+    "/name": {
+      "get": {
+        "description": "return all phones by username",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "return all phones by username",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contacts": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "Contact": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "phones": {
+          "type": "array"
+        }
+      }
+    },
+    "UpdatePhone": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "old_phone": {
+          "type": "string"
+        },
+        "new_phone": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
